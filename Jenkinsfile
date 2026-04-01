@@ -2,7 +2,7 @@ pipeline {
     agent any
  
     parameters {
-        choice(name: 'ACTION', choices: ['validate', 'plan', 'apply', 'destroy'], description: 'Terraform Action')
+        choice(name: 'ACTION', choices: ['apply', 'destroy'], description: 'Terraform Action')
         string(name: 'INSTANCE_TYPE', defaultValue: 't3.micro', description: 'EC2 Instance Type')
     }
  
@@ -14,7 +14,7 @@ pipeline {
  
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/DevopsPractice95/Terraform-Ec2.git'
+                git branch: 'main', url: 'https://github.com/jenasangita097-afk/AWS-EC2Terraform-Jenkins.git'
             }
        }
  
