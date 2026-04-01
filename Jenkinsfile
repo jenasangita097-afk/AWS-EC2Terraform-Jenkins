@@ -20,13 +20,13 @@ pipeline {
  
         stage('Terraform Init') {
             steps {
-                sh 'terraform init'
+                bat 'terraform init'
             }
         }
  
         stage('Terraform Plan') {
             steps {
-                sh "terraform plan -var='instance_type=${params.INSTANCE_TYPE}'"
+                bat "terraform plan -var='instance_type=${params.INSTANCE_TYPE}'"
             }
         }
  
@@ -39,7 +39,7 @@ pipeline {
                 usernameVariable: 'AWS_ACCESS_KEY_ID',
                 passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
  
-                    sh "terraform apply -auto-approve -var='instance_type=${params.INSTANCE_TYPE}'"
+                    bat "terraform apply -auto-approve -var='instance_type=${params.INSTANCE_TYPE}'"
                 }
             }
         }
@@ -53,14 +53,14 @@ pipeline {
                 usernameVariable: 'AWS_ACCESS_KEY_ID',
                 passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
  
-                    sh 'terraform destroy -auto-approve'
+                    bat 'terraform destroy -auto-approve'
                 }
             }
         }
  
         stage('Show Outputs') {
             steps {
-                sh 'terraform output'
+                bat 'terraform output'
             }
         }
     }
